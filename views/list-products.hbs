@@ -1,0 +1,108 @@
+<div class="container banner-resto">
+  <p>
+    Resto Menu Checkout
+  </p>
+</div>
+<div class="container main">
+  <div class="row">
+    <div class="col-sm-8 list-products flex-wrap d-flex justify-content-center">
+      {{#each data}}
+        <div class="card p-3 m-3" style="width: 18rem;">
+          <img
+            class="card-img-top"
+            src="/img/{{product_image}}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title" id="product-{{id}}-name">
+              {{product_name}}
+            </h5>
+            <p class="card-text">
+              Rp
+              <span id="product-{{id}}-price">
+                {{product_price}}
+              </span>
+            </p>
+            <div class="content d-flex justify-content-around w-100">
+              <input
+                type="number"
+                id="product-{{id}}-count"
+                class="form-control"
+                value="0"
+                disabled
+              />
+              <div class="button">
+                <button
+                  class="btn btn-primary px-3"
+                  onclick="btnMinus({{id}})"
+                  id="btnMinus-{{id}}"
+                  disabled
+                >
+                  -
+                </button>
+                <button
+                  class="btn btn-primary px-3"
+                  onclick="btnPlus({{id}})"
+                  id="btnPlus-{{id}}"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="col-4 checkout">
+      <p class="text-center pt-4 pb-2">
+        Insert Your Order Number
+      </p>
+      <form action="" class="d-flex">
+        <input type="text" class="form-control" placeholder="6 Digit Code" />
+        <button type="submit" class="btn btn-info">
+          Check
+        </button>
+      </form>
+      {{#if cart}}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                Item
+              </th>
+              <th scope="col">
+                Qty
+              </th>
+              <th scope="col">
+                Price
+              </th>
+              <th scope="col">
+                Total
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr></tr>
+          </tbody>
+        </table>
+        <p class="border p-2 text-center">
+          <strong>
+            Grand Total =
+          </strong>
+          Rp
+          <span id="grand-total">
+            0
+          </span>
+        </p>
+        <div class="w-100 text-center">
+          <a href="/" class="btn btn-warning col-4">
+            Batal
+          </a>
+          <button class="btn btn-primary col-4">
+            Checkout
+          </button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
