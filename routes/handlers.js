@@ -14,10 +14,21 @@ router.get('/list-products', (req, res) => {
   });
 });
 
-router.get('/add-to-cart', (req, res) => {
-  orm.selectCartAll(function (error, data) {
-    res.send(data);
-  });
+router.get('/get-order', (req, res) => {
+  res.send([
+    {
+      id: 1,
+      product_name: 'Pisang',
+      product_qty: 2,
+      product_price: 4500,
+    },
+    {
+      id: 2,
+      product_name: 'Pepaya',
+      product_qty: 3,
+      product_price: 12000,
+    },
+  ]);
 });
 
 module.exports = router;
