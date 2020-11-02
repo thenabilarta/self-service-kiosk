@@ -1,5 +1,12 @@
+// Init total price text
 let total_price = parseInt($('#grand-total').text());
 
+// Formatting the number
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+}
+
+// Disable check order after click
 $('.btn-check-order').click(function () {
   $('.btn-check-order').prop('disabled', true);
 
@@ -7,24 +14,29 @@ $('.btn-check-order').click(function () {
     url: '/get-order',
     success: function (result) {
       result.map((i) => {
+        // Check if product already exist on the order table
         if ($(`#product-name-order-${i.id}`).length) {
           console.log('tes');
+          // get qty of product from main table
           let qty = parseInt($(`#product-${i.id}-count`).val());
+
+          // add qty of product
           qty += i.product_qty;
-          console.log(qty);
+
+          // Update count on main and order table
           $(`#product-${i.id}-count`).val(qty);
           $(`#product-qty-order-${i.id}`).text(qty);
+
+          // update total price of product on order table
           let total_price_product = qty * i.product_price;
-          console.log(total_price_product);
           $(`#product-total-order-${i.id}`).text(
             formatNumber(total_price_product)
           );
 
+          // Add total price of product to grand total
           countTotalPricePlus(i.product_price * i.product_qty);
-
-          // countTotalPricePlus(parseInt(total_price_product));
         } else {
-          console.log('tes2');
+          // if product doesn't exist on the order table, add row
           $('table tbody tr:last').after(
             `<tr id="table-row-${i.id}">
               <td id="product-name-order-${i.id}">${i.product_name}</td>
@@ -36,19 +48,19 @@ $('.btn-check-order').click(function () {
             </tr>`
           );
 
+          // Add total price of product to grand total
           countTotalPricePlus(i.product_price * i.product_qty);
         }
 
+        //  Update total count on the main table
         $(`#product-${i.id}-count`).val(i.product_qty);
+
+        // Enable minus total count on the main table
         $(`#btnMinus-${i.id}`).prop('disabled', false);
       });
     },
   });
 });
-
-function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-}
 
 function countTotalPricePlus(price) {
   total_price += price;
