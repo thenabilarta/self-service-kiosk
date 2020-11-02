@@ -10,9 +10,9 @@ $('.btn-check-order').click(function () {
         if ($(`#product-name-order-${i.id}`).length) {
           console.log('tes');
           let qty = parseInt($(`#product-${i.id}-count`).val());
-          console.log(qty);
           qty += i.product_qty;
           console.log(qty);
+          $(`#product-${i.id}-count`).val(qty);
           $(`#product-qty-order-${i.id}`).text(qty);
           let total_price_product = qty * i.product_price;
           console.log(total_price_product);

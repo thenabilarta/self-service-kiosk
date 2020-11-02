@@ -8,12 +8,12 @@ const orm = {
     });
   },
 
-  selectCartAll: function (cb) {
-    connection.query('SELECT * FROM cart', function (err, data) {
-      if (err) cb(err, null);
-      cb(null, data);
-    });
-  },
+  // selectCartAll: function (cb) {
+  //   connection.query('SELECT * FROM cart', function (err, data) {
+  //     if (err) cb(err, null);
+  //     cb(null, data);
+  //   });
+  // },
 
   // selectOne: function (id, cb) {
   //   connection.query(`SELECT * FROM dataproduk WHERE id = ${id}`, function (
